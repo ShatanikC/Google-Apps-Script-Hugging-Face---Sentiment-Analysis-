@@ -13,7 +13,7 @@ Whether you need simple whole-text classification or granular **Aspect-Based Sen
 
 *   **Whole-Text Sentiment Analysis:** Quickly classify reviews, tweets, or feedback into sentiment labels with confidence scores, spilling results across columns automatically.
 *   **Aspect-Based Sentiment Analysis (ABSA):** Break down complex reviews (e.g., *"the food was good but the bathroom was stinky"*) to evaluate individual aspects/features with their own sentiment and score.
-*   **OpenAI-Compatible Chat Router Support:** Utilizes Hugging Face's latest chat router endpoints (`/v1/chat/completions`) for robust structured data extraction using models like `Qwen/Qwen2.5-7B-Instruct`.
+*   **OpenAI-Compatible Chat Router Support:** Utilizes Hugging Face's latest chat router endpoints (`/v1/chat/completions`) for robust structured data extraction using models like `meta-llama/Llama-3.1-8B-Instruct`.
 *   **Configurable Model Selection:** Easily swap out model names via function parameters or fall back to powerful defaults (like `cardiffnlp/twitter-roberta-base-sentiment-latest`).
 *   **Spill-Friendly 2D Arrays:** Functions return multi-dimensional arrays that automatically populate adjacent rows and columns like native Google Sheets functions.
 
