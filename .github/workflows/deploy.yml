@@ -1,0 +1,41 @@
+name: Deploy Apps Script to Production
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install CLASP Globally
+        run: npm install -g @google/clasp
+
+      - name: Authenticate CLASP via .clasprc.json
+        run: |
+          echo '{
+            "token": {
+              "access_token": "${{ secrets.ACCESS_TOKEN }}",
+              "refresh_token": "${{ secrets.REFRESH_TOKEN }}",
+              "scope": "https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/script.deployments https://www.googleapis.com/auth/script.webapp.deployments https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid",
+              "token_type": "Bearer",
+              "expiry_date": 1900000000000
+            },
+            "oauthClientSettings": {
+              "clientId": "${{ secrets.CLIENT_ID }}",
+              "clientSecret": "${{ secrets.CLIENT_SECRET }}"
+            }
+          }' > ~/.clasprc.json
+
+      - name: Push Code to Google Apps Script
+        run: clasp push --force
